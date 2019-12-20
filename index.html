@@ -1,0 +1,189 @@
+<!doctype html>
+<html>
+<html lang="en"></html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="mystyle.css">
+<script src="https://d3js.org/d3.v4.js"></script>
+
+<head>
+<title>Facts about 5 boroughs in NYC:Save the children!</title>
+
+</head>
+
+<body>
+  <body style="background-color:#e7f4fab7;"></body>
+  
+    <div class="desktop">
+        <div style="border-width: 80px; text-align:left; padding-top:150px; padding-left: 50px; width:1000px; height:5px; line-height:65px;">
+            <font size=6 color="#000000"><h1>Facts about 5 boroughs in NYC:<br><b>Save the children!</b></br></h1>
+            </font>
+            <img src="https://i.pinimg.com/originals/dd/e5/bb/dde5bb949c91afecbf7f3cfc42d1fe8e.png" width=30% height=30% align="right" >
+            </div>
+
+        <div style="border-width: 100px; text-align:justify; padding-top:200px; padding-left: 50px; width:500px; height:200px; line-height:20px;">
+                <font size=3 color="#6C6C6C">New York City, one of the most prosperous metropolises in the United States, is developing rapidly and competitively, causing the problem of uneven distribution of social resources. With the development of society, people pay more and more attention to the growth environment and resources of the next generation, which plays a decisive guiding role in one's growth. However, along the context of history, NYC has experienced seriously uneven resources distribution, and that the neighborhood ’s impact on children is greatly different.
+                </font>
+              </div>
+
+        <div style="border-width: 100px; text-align:justify; padding-top:0px; padding-left: 50px; width:500px; height:300px; line-height:20px;">
+                <font size=3 color="#6C6C6C">This article will be divided into two parts. The first part explains the facts and understands the data of each borough that directly influence the growth of the child. The second part tries to find out what could be done to help them, advocating authority to work on specific aspects.
+                </font>
+              </div>
+    </div>
+        <img src="https://thefederalistpapers.org/wp-content/uploads/2016/04/refugee-children.jpg" width=100% height=100% >
+
+    <div class="Less Opportunities">
+      <div style="border-width: 80px; text-align:left; padding-top:50px; padding-left: 50px; width:1000px; height:20px; line-height:65px;">
+        <font size=6 color="#000000"><h3>Less And Less Opportunity For Poor Kids</h3>
+        </font>
+        </div>
+      <div style="border-width: 100px; text-align:justify; padding-top:100px; padding-left: 50px; width:500px; height:250px; line-height:20px;">
+        <front size=3 color="#6C6C6C">By comparing 5 counties, Manhattan, Queens, Kings, Richmond and Bronx, I will mainly compare two types of data: Household Income and Fraction College of Graduates. <br>It was found that the problems in the Bronx area were the most serious: Here, household income was the relatively lowest, and Fraction College graduates were also the lowest too. Only about 18% of them graduated from college. However, living in the prosperous Manhattan area has the highest education level, as high as 60%, and its income is also very considerable, which is not surprising. But it was unexpected that in Queens, its Fraction College of graduates is just 30%, which is average for Manhattan, while its income is even higher than Manhattan Island which up to 39k dollars yearly. I’m very curious about the reason.</br><br>Usually people think that the power of education can totally improve the track of one's growth. Therefore, according to the comparison between Bronx and Manhattan, it is obvious that most of children living in Bronx do not have the opportunity to receive adequate education.</br>
+          </font>
+      
+      
+
+<!-- D3 of household income -->
+<script src="https://d3js.org/d3.v4.js"></script>
+
+<div id="my_dataviz"></div>
+<script>
+
+    var width = 600
+        height = 450
+        margin = 40
+    
+  
+    var radius = Math.min(width, height) / 2 - margin
+   
+    var svg = d3.select("#my_dataviz")
+      .append("svg")
+        .attr("width", width)
+        .attr("height", height)
+      .append("g")
+        .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+    
+    var data = {"Mahatten": 37826, "Kings": 37229, "Queens":45330, "Richmond":56457, "Bronx":32542}
+    var color = d3.scaleOrdinal()
+      .domain(data)
+      .range(["#ccd9ff", "#809fff", "#3366ff", "#0039e6", "#002699"])
+  
+    var pie = d3.pie()
+      .value(function(d) {return d.value; })
+    var data_ready = pie(d3.entries(data))
+    
+    svg
+      .selectAll('whatever')
+      .data(data_ready)
+      .enter()
+      .append('path')
+      .attr('d', d3.arc()
+        .innerRadius(0)
+        .outerRadius(radius)
+      )
+      .attr('fill', function(d){ return(color(d.data.key)) })
+      .attr("stroke", "white")
+      .style("stroke-width", "3px")
+      .style("opacity", 0.75)
+    
+    </script>
+
+
+
+<!-- D3 of education -->
+
+<div id="my_dataviz"></div>
+<script>
+
+    var width = 600
+        height = 450
+        margin = 40
+    
+    var radius = Math.min(width, height) / 2 - margin
+    
+    var svg = d3.select("#my_dataviz")
+      .append("svg")
+        .attr("width", width)
+        .attr("height", height)
+      .append("g")
+        .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+    
+    var data = {"Mahatten": 0.5965, "Kings": 0.3224, "Queens":0.2993, "Richmond":0.3104, "Bronx":0.1836}
+    
+    var color = d3.scaleOrdinal()
+      .domain(data)
+      .range(["#ffcce0", "#ff99c2", "#ff66a3", "#ff3385", "#ff0066"])
+    
+    var pie = d3.pie()
+      .value(function(d) {return d.value; })
+    var data_ready = pie(d3.entries(data))
+    
+    svg
+      .selectAll('whatever')
+      .data(data_ready)
+      .enter()
+      .append('path')
+      .attr('d', d3.arc()
+        .innerRadius(0)
+        .outerRadius(radius)
+      )
+      .attr('fill', function(d){ return(color(d.data.key)) })
+      .attr("stroke", "white")
+      .style("stroke-width", "3px")
+      .style("opacity", 0.75)
+
+    
+    </script>
+
+        </div>
+      </div>
+ 
+    <div class="How to hlep">
+        <div style="border-width: 80px; text-align:left; padding-top:1100px; padding-left: 50px; width:1000px; height:5px; line-height:65px;">
+            <font size=6 color="#000000"><h3>How to help families on economic budget</h3>
+            </font>
+            </div>
+
+        <div style="border-width: 100px; text-align:justify; padding-top:120px; padding-left: 50px; width:500px; height:50px; line-height:20px;">
+          <font size=5 color="#000000"><b>Reducing Living Expenses?</b>
+          </font>
+          </div>
+
+          <div style="border-width: 100px; text-align:justify; padding-top:50px; padding-left: 50px; width:500px; height:100px; line-height:20px;">
+            <font size=3 color="#6C6C6C">In order to help the families in Bronx, from one aspect, it is possible to minimize the cost of living expenses. In a family, renting is always the largest proportion of expenses. However, the data shows that the renting fee in the Bronx area is already the lowest, so it is less likely to reduce living expenses.
+                </font>
+              </div>
+
+        <div>
+          <img src=" https://furmancenter.org/images/blog/rent_sba_map_logo.png" width=30% height=30%  style="margin: 15px 20px 25px 30px;">
+        </div>
+
+
+      <div style="border-width: 100px; text-align:justify; padding-top:120px; padding-left: 50px; width:500px; height:50px; line-height:20px;">
+        <font size=5 color="#000000"><b>Increasing Employment?</b>
+        </font>
+        </div>
+
+        <div style="border-width: 100px; text-align:justify; padding-top:50px; padding-left: 50px; width:500px; height:100px; line-height:20px;">
+          <font size=3 color="#6C6C6C">Another aspect that can help poor families is to increase their chances of employment, helping increase the income of a family. It can be seen on the Job Density Mapping that Job Density in Bronx is the lowest, because there is a lot of room to increase employment. So providing more and better jobs in Bronx is really a good way.
+              </font>
+            </div>
+
+      <div>
+        <img src="https://pbs.twimg.com/media/DjDlIohXoAAMQJU.jpg" width=30% height=30%  style="margin: 15px 20px 25px 30px;">
+      </div>
+
+               
+           
+      
+
+
+             
+
+
+
+
+</body>
+
+
+
